@@ -2,7 +2,7 @@ package julioarellano.wiiselandroid7.manager;
 
 import android.os.AsyncTask;
 
-import com.android.wiisel.application.WiiselApplication;
+import julioarellano.wiiselandroid7.application.WiiselApplication;
 
 public class DataQueueManager {
 

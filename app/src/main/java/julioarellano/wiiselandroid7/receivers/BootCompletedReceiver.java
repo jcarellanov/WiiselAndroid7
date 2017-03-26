@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.android.wiisel.R;
-import com.android.wiisel.activity.AcLogin;
-import com.android.wiisel.constants.AppConstants;
+import julioarellano.wiiselandroid7.R;
+import julioarellano.wiiselandroid7.activity.AcLogin;
+import julioarellano.wiiselandroid7.constants.AppConstants;
 
 /**
  * this receiver automatically opens app when device is turned on

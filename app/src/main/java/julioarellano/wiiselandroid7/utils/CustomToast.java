@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.wiisel.R;
+import julioarellano.wiiselandroid7.R;
 
 public class CustomToast {
     private static Toast toast;

@@ -15,8 +15,8 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.android.wiisel.constants.AppConstants;
-import com.android.wiisel.parser.InsoleDataParserSecond;
+import julioarellano.wiiselandroid7.constants.AppConstants;
+import julioarellano.wiiselandroid7.parser.InsoleDataParserSecond;
 
 import java.util.List;
 

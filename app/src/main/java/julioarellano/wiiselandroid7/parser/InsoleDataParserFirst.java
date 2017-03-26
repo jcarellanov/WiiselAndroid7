@@ -1,11 +1,11 @@
 package julioarellano.wiiselandroid7.parser;
 
-import com.android.wiisel.application.WiiselApplication;
-import com.android.wiisel.manager.DataQueueManager;
-import com.android.wiisel.manager.PhoneStateManager;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import julioarellano.wiiselandroid7.application.WiiselApplication;
+import julioarellano.wiiselandroid7.manager.DataQueueManager;
+import julioarellano.wiiselandroid7.manager.PhoneStateManager;
 
 public class InsoleDataParserFirst {
 

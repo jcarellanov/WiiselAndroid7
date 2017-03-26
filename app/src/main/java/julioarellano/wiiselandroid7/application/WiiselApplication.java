@@ -3,7 +3,7 @@ package julioarellano.wiiselandroid7.application;
 import android.app.Application;
 import android.util.Log;
 
-import com.android.wiisel.R;
+import julioarellano.wiiselandroid7.R;
 
 public class WiiselApplication extends Application {
 

@@ -18,13 +18,13 @@ import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 
-import com.android.wiisel.R;
-import com.android.wiisel.application.WiiselApplication;
-import com.android.wiisel.constants.AppConstants;
-import com.android.wiisel.manager.ConnectionManager;
-import com.android.wiisel.service.BluetoothLeServiceLeft;
-import com.android.wiisel.service.BluetoothLeServiceRight;
-import com.android.wiisel.service.UIService;
+import julioarellano.wiiselandroid7.R;
+import julioarellano.wiiselandroid7.application.WiiselApplication;
+import julioarellano.wiiselandroid7.constants.AppConstants;
+import julioarellano.wiiselandroid7.manager.ConnectionManager;
+import julioarellano.wiiselandroid7.service.BluetoothLeServiceLeft;
+import julioarellano.wiiselandroid7.service.BluetoothLeServiceRight;
+import julioarellano.wiiselandroid7.service.UIService;
 
 import org.apache.http.HttpResponse;
 import org.json.JSONObject;

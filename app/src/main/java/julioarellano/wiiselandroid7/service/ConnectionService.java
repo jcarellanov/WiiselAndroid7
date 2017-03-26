@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 
-import com.android.wiisel.R;
-import com.android.wiisel.constants.AppConstants;
+import julioarellano.wiiselandroid7.R;
+import julioarellano.wiiselandroid7.constants.AppConstants;
 
 public class ConnectionService extends Service {
 

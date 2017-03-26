@@ -3,7 +3,7 @@ package julioarellano.wiiselandroid7.utils;
 import android.content.Context;
 import android.content.Intent;
 
-import com.android.wiisel.constants.AppConstants;
+import julioarellano.wiiselandroid7.constants.AppConstants;
 
 public class UIUtil {
     public static void appendLoggerMessage(Context context, final String text) {

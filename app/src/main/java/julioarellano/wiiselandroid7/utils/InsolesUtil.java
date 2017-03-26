@@ -1,9 +1,9 @@
 package julioarellano.wiiselandroid7.utils;
 
-import com.android.wiisel.parser.InsoleDataParserFirst;
-import com.android.wiisel.parser.InsoleDataParserSecond;
-import com.android.wiisel.service.BluetoothLeServiceLeft;
-import com.android.wiisel.service.BluetoothLeServiceRight;
+import julioarellano.wiiselandroid7.parser.InsoleDataParserFirst;
+import julioarellano.wiiselandroid7.parser.InsoleDataParserSecond;
+import julioarellano.wiiselandroid7.service.BluetoothLeServiceLeft;
+import julioarellano.wiiselandroid7.service.BluetoothLeServiceRight;
 
 public class InsolesUtil {
 
