@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="header_login_screen">#9AB7E0</color>
+    <color name="edittext_border_color">#000000</color>
+    <color name="main_background_grey">#E3E3E3</color>
+    <color name="main_title_grey">#BDBDBD</color>
+    <color name="warning_dialog_background">#aa000000</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+
+</resources>

@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/padding_top_pannel_main"
+    android:background="@color/main_background_grey" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/first_insole"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_gyroscope_l_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/gyroscope" />
+
+                <TextView
+                    android:id="@+id/tv_gyro_x_l_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/x" />
+
+                <TextView
+                    android:id="@+id/tv_gyro_y_l_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/y" />
+
+                <TextView
+                    android:id="@+id/tv_gyro_z_l_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/z" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_accelerometer_mpu_l_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/accelerometer_mpu" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_mpu_x_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/x" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_mpu_y_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/y" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_mpu_z_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/z" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_accelerometer_lis_l_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/accelerometer_lis" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_lis_x_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/x" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_lis_y_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/y" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_lis_z_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/z" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_pressure_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pressure" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_0_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press0" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_1_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press1" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_2_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press2" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_3_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press3" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_4_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press4" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_5_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press5" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_6_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press6" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_7_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press7" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_8_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press8" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_9_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press9" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_10_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press10" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_11_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press11" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_12_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press12" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_13_l_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press13" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/second_insole"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_gyroscope_r_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/gyroscope" />
+
+                <TextView
+                    android:id="@+id/tv_gyro_x_r_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/x" />
+
+                <TextView
+                    android:id="@+id/tv_gyro_y_r_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/y" />
+
+                <TextView
+                    android:id="@+id/tv_gyro_z_r_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/z" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_accelerometer_mpu_r_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/accelerometer_mpu" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_mpu_x_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/x" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_mpu_y_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/y" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_mpu_z_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/z" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_accelerometer_lis_r_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/accelerometer_lis" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_lis_x_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/x" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_lis_y_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/y" />
+
+                    <TextView
+                        android:id="@+id/tv_accel_lis_z_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/z" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pressure" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_0_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press0" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_1_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press1" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_2_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press2" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_3_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press3" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_4_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press4" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_5_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press5" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_6_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press6" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_7_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press7" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_8_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press8" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_9_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press9" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_10_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press10" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_11_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press11" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_12_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press12" />
+
+                    <TextView
+                        android:id="@+id/tv_pressure_13_r_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press13" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

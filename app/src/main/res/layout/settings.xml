@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/main_background_grey"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/tv_serv_ip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/et_ip_server"
+                android:text="@string/serverip"
+                android:textSize="@dimen/text_warning_screen_size" />
+
+            <EditText
+                android:id="@+id/et_ip_server"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/tv_serv_ip"
+                android:inputType="text" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/main_background_grey"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_deff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/deff_opt"
+                    android:textSize="@dimen/text_warning_screen_size"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/cb_deff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_auto_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/start_auto"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <CheckBox
+                    android:id="@+id/cb_auto_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_auto_authriz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/auto_auth"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <CheckBox
+                    android:id="@+id/cb_auto_auth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_auto_connect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/auto_connection"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <CheckBox
+                    android:id="@+id/cb_auto_connect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_fall_detect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/fall_detect"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <CheckBox
+                    android:id="@+id/cb_fall_detect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_show_logger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/showlogger"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <CheckBox
+                    android:id="@+id/cb_show_logger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/main_background_grey"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_accelerometer_sensitivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Acceleration sensibility:"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <TextView
+                    android:id="@+id/tv_accelerometer_sensitivity_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_accelerometer_sensitivity"
+                    android:layout_alignParentRight="true"
+                    android:text="0"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <SeekBar
+                    android:id="@+id/sb_accelerometer_sensitivity"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_accelerometer_sensitivity"
+                    android:max="60" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/tv_dalay_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delay time after fall:"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <TextView
+                    android:id="@+id/tv_delay_time_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_dalay_time"
+                    android:layout_alignParentRight="true"
+                    android:text="0"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <SeekBar
+                    android:id="@+id/sb_delay_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_dalay_time"
+                    android:max="60" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/tv_allowed_angle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Insoles critical angle:"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <SeekBar
+                    android:id="@+id/sb_allowed_angle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_allowed_angle"
+                    android:max="90" />
+
+                <TextView
+                    android:id="@+id/tv_allowed_angle_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_allowed_angle"
+                    android:layout_alignParentRight="true"
+                    android:text="0"
+                    android:textSize="@dimen/text_warning_screen_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/tv_no_movement_acceleration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No movement acceleration sensibility:"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <SeekBar
+                    android:id="@+id/sb_no_movement_acceleration"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_no_movement_acceleration"
+                    android:max="60" />
+
+                <TextView
+                    android:id="@+id/tv_no_movement_acceleration_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_no_movement_acceleration"
+                    android:layout_alignParentRight="true"
+                    android:text="0"
+                    android:textSize="@dimen/text_warning_screen_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/tv_press_sensors_sensitivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pressure sensors sensitivity:"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <SeekBar
+                    android:id="@+id/sb_press_sensors_sensitivity"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_press_sensors_sensitivity"
+                    android:max="1024" />
+
+                <TextView
+                    android:id="@+id/tv_press_sensors_sensitivity_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_press_sensors_sensitivity"
+                    android:layout_alignParentRight="true"
+                    android:text="0"
+                    android:textSize="@dimen/text_warning_screen_size" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/main_background_grey"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+            <LinearLayout
+                android:id="@+id/ll_control_panel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_icon_settings_main"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/sb_accelerometer_sensitivity"
+                android:layout_margin="5dp" >
+
+                <Button
+                    android:id="@+id/btn_test_details_settings_screen"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:contentDescription="@string/description"
+                    android:text="@string/details_button"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <Button
+                    android:id="@+id/btn_save_settings_screen"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:contentDescription="@string/description"
+                    android:text="@string/save_button"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <Button
+                    android:id="@+id/btn_log_out"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:contentDescription="@string/description"
+                    android:text="@string/log_out_button"
+                    android:textSize="@dimen/text_warning_screen_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/size_icon_settings_main"
+                android:layout_below="@+id/ll_control_panel" >
+
+                <ToggleButton
+                    android:id="@+id/tb_clipmode"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:textOff="@string/general_mode"
+                    android:textOn="@string/clip_mode"
+                    android:textSize="@dimen/text_warning_screen_size" />
+
+                <Button
+                    android:id="@+id/btn_rl_refresh_update"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:text="@string/refresh_ud"
+                    android:textSize="@dimen/text_warning_screen_size" >
+                </Button>
+
+                <Button
+                    android:id="@+id/btn_calibration_settings_screen"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:contentDescription="@string/description"
+                    android:text="@string/calibration"
+                    android:textSize="@dimen/text_warning_screen_size" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

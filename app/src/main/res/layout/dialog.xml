@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/back"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/warning_dialog_background" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/transparent" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="420dp"
+            android:layout_centerVertical="true"
+            android:background="@color/main_title_grey" >
+
+            <TextView
+                android:id="@+id/tv_warning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:text="@string/warning"
+                android:textColor="@android:color/background_dark"
+                android:textSize="@dimen/text_warning_screen_size" />
+
+            <TextView
+                android:id="@+id/tv_text_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_warning"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/fall_has_been_detected"
+                android:textColor="@android:color/background_dark"
+                android:textSize="@dimen/text_warning_screen_size" />
+
+            <Button
+                android:id="@+id/btn_i_am_ok"
+                android:layout_width="@dimen/warningscreen_button_width"
+                android:layout_height="@dimen/warningscreen_button_heigth"
+                android:layout_below="@+id/tv_text_warning"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margitn_top_10dp"
+                android:background="@drawable/stand" />
+
+            <Button
+                android:id="@+id/btn_i_fall"
+                android:layout_width="@dimen/warningscreen_button_width"
+                android:layout_height="@dimen/warningscreen_button_heigth"
+                android:layout_below="@+id/btn_i_am_ok"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margitn_top_10dp"
+                android:background="@drawable/fall" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
