@@ -6,9 +6,9 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 
-import com.android.wiisel.R;
-import com.android.wiisel.activity.Dialog;
-import com.android.wiisel.activity.interfaces.SoundManagerListener;
+import julioarellano.wiiselandroid7.R;
+import julioarellano.wiiselandroid7.activity.Dialog;
+import julioarellano.wiiselandroid7.activity.interfaces.SoundManagerListener;
 
 public class SoundManager {
 
