@@ -2,12 +2,12 @@ package julioarellano.wiiselandroid7.manager;
 
 import android.os.Environment;
 
-import com.android.wiisel.application.WiiselApplication;
-import com.android.wiisel.constants.AppConstants;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import julioarellano.wiiselandroid7.application.WiiselApplication;
+import julioarellano.wiiselandroid7.constants.AppConstants;
 
 public class FileDataManager {
 

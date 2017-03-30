@@ -1,95 +1,105 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp">
 
-    <RelativeLayout
-        android:id="@+id/rl_header_login_screen"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/header_login_screen"
-        android:background="@color/header_login_screen" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/margin_left_text_header_login_screen"
-            android:text="@string/app_name"
-            android:textSize="@dimen/text_size_app_name"
-            android:textStyle="bold" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/login_padding_text"
+        android:paddingTop="@dimen/login_padding_text"
+        android:text="@string/text_email"
+        android:textSize="15sp"
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/rl_header_login_screen"
-        android:padding="@dimen/login_screen_padding" >
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/et_email_input"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="@+id/et_email_input"
+        android:layout_marginTop="0dp" />
 
-        <TextView
-            android:id="@+id/tv_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tv_email_login_screen_top_margin"
-            android:paddingBottom="@dimen/login_padding_text"
-            android:paddingTop="@dimen/login_padding_text"
-            android:text="@string/text_email"
-            android:textSize="@dimen/tv_email_password_text_size_login" />
+    <EditText
+        android:id="@+id/et_email_input"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="19dp"
+        android:inputType="textEmailAddress"
+        android:singleLine="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <EditText
-            android:id="@+id/et_email_input"
-            android:layout_width="@dimen/et_wight_login_screen"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_email"
-            android:inputType="textEmailAddress"
-            android:singleLine="true" />
+    <TextView
+        android:id="@+id/tv_password_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/login_padding_text"
+        android:paddingTop="@dimen/login_padding_text"
+        android:text="@string/text_password"
+        android:textSize="15sp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_password_input"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_email"
+        app:layout_constraintHorizontal_bias="0.0" />
 
-        <TextView
-            android:id="@+id/tv_password_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/et_email_input"
-            android:paddingBottom="@dimen/login_padding_text"
-            android:paddingTop="@dimen/login_padding_text"
-            android:text="@string/text_password"
-            android:textSize="@dimen/tv_email_password_text_size_login" />
+    <EditText
+        android:id="@+id/et_password_input"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:inputType="text"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@+id/et_email_input"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/et_email_input" />
 
-        <EditText
-            android:id="@+id/et_password_input"
-            android:layout_width="@dimen/et_wight_login_screen"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_password_input"
-            android:inputType="text"
-            android:singleLine="true" />
+    <Button
+        android:id="@+id/btn_sign_on_login"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/sign_in_login_screen"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_password_input" />
 
-        <Button
-            android:id="@+id/btn_sign_on_login"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/et_password_input"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/tv_email_login_screen_top_margin"
-            android:text="@string/sign_in_login_screen" />
-
-<!--         <ImageView -->
-<!--             android:id="@+id/btn_log_sett" -->
-<!--             android:layout_width="50dp" -->
-<!--             android:layout_height="50dp" -->
-<!--             android:layout_alignParentBottom="true" -->
-<!--             android:layout_alignParentRight="true" -->
-<!--             android:contentDescription="@string/description" -->
-<!--             android:src="@drawable/settings" /> -->
-    </RelativeLayout>
 
     <Button
         android:id="@+id/buttonDemo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="63dp"
-        android:layout_marginEnd="66dp"
-        android:text="Skip Login" />
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="25dp"
+        android:text="Skip Login"
+        app:layout_constraintRight_toRightOf="@+id/btn_sign_on_login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_on_login" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/app_name"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
