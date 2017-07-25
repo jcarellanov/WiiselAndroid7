@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:visibility="visible" >
@@ -48,6 +49,34 @@
             android:background="@drawable/message_btn_background"
             android:padding="@dimen/padding_image_small_main_screen"
             android:visibility="gone"></RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_rl_connection_toggle"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/btn_rl_settings_image_main"
+            android:padding="5dp"
+            >
+
+            <Button
+                android:id="@+id/toggleButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_above="@+id/tv_connection_state"
+                android:text="ToggleButton"
+                tools:text="Off" />
+
+            <TextView
+                android:id="@+id/tv_connection_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/connection_state"
+                android:textColor="@android:color/background_dark" />
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/btn_rl_settings_image_main"
@@ -187,11 +216,10 @@
 
             <TextView
                 android:id="@+id/tv_left_isole"
-                android:layout_width="0dp"
+                android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
-                android:layout_weight="0.4"
                 android:gravity="center_vertical"
                 android:text="@string/insole_l"
                 android:textSize="@dimen/main_text_status_size"
@@ -202,7 +230,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_weight="0.2"
+                android:layout_weight="0.17"
                 android:contentDescription="@string/image"
                 android:src="@drawable/failure" />
 

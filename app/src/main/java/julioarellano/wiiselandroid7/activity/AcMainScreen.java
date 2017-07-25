@@ -34,11 +34,17 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import julioarellano.wiiselandroid7.R;
 import julioarellano.wiiselandroid7.activity.interfaces.IRefreshable;
 import julioarellano.wiiselandroid7.application.WiiselApplication;
 import julioarellano.wiiselandroid7.constants.AppConstants;
-
 import julioarellano.wiiselandroid7.interfaces.InsolesType;
 import julioarellano.wiiselandroid7.interfaces.OnDataReseivedListener;
 import julioarellano.wiiselandroid7.manager.PhoneStateManager;
@@ -50,14 +56,6 @@ import julioarellano.wiiselandroid7.service.ConnectionService;
 import julioarellano.wiiselandroid7.utils.CustomToast;
 import julioarellano.wiiselandroid7.utils.InsolesUtil;
 import julioarellano.wiiselandroid7.utils.UIUtil;
-
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 //Acreo_johros: added
 
@@ -113,6 +111,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
     BluetoothGattService mDataServiceLeft = null;
     BluetoothGattService mBatteryServiceLeft = null;
     BluetoothGattService mBatteryServiceRight = null;
+    Button connection_toggle;
 
     // private boolean refreshGUI = false;
 
@@ -164,6 +163,8 @@ public class AcMainScreen extends Activity implements IRefreshable {
         restoreViewStatus();
         mServiceListRight = new ArrayList<BluetoothGattService>();
         mServiceListLeft = new ArrayList<BluetoothGattService>();
+        connection_toggle = (Button) findViewById(R.id.toggleButton);
+        connection_toggle.setText("OFF");
 
         SharedPreferences sharedPreferences =
                 getSharedPreferences(getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
@@ -185,9 +186,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
     }
 
     /**
-     * 
-     * @param insole
-     *            0 - left; 1 - right
+     * @param insole      0 - left; 1 - right
      * @param isConnected
      */
     private void isEnabledIndicators(int insole, boolean isConnected) {
@@ -353,9 +352,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
     }
 
     /**
-     * 
-     * @param mode
-     *            - Calibration mode stage, by default it = 1
+     * @param mode - Calibration mode stage, by default it = 1
      */
     private void setCalibrationMode(final int mode) {
         appendLoggerMessage("setCalibrationMode: " + String.valueOf(mode));
@@ -377,8 +374,8 @@ public class AcMainScreen extends Activity implements IRefreshable {
         if (isConnectionEstablished()) {
 
             final int[] DIALOG_MESSAGE_IDS =
-                    { 0, R.string.dialog_message_1, R.string.dialog_message_2, R.string.dialog_message_3,
-                            R.string.dialog_message_4, R.string.dialog_message_5, R.string.dialog_message_6 };
+                    {0, R.string.dialog_message_1, R.string.dialog_message_2, R.string.dialog_message_3,
+                            R.string.dialog_message_4, R.string.dialog_message_5, R.string.dialog_message_6};
 
             int dialogMessageResId = DIALOG_MESSAGE_IDS[mode];
             InsolesUtil.setCalibrationMode(mode);
@@ -466,7 +463,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
         right_battery_level = (ImageView) findViewById(R.id.iv_right_battery);
         left_battery_level = (ImageView) findViewById(R.id.iv_left_battery);
 
-        findViewById(R.id.tl_controls).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.toggleButton).setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -572,9 +569,8 @@ public class AcMainScreen extends Activity implements IRefreshable {
 
     /**
      * Creates dialog. when user press at the any insole
-     * 
-     * @param isconnect
-     *            - Is insoles connected? If true - connect button turns to disconnect
+     *
+     * @param isconnect - Is insoles connected? If true - connect button turns to disconnect
      */
     private void createDialog(final boolean isconnect) {
 
@@ -608,8 +604,11 @@ public class AcMainScreen extends Activity implements IRefreshable {
                 if (!isconnect) {
                     // connect();
                     connectToInsolesActomaticallyFirstTime();
+
+
                 } else {
                     disconnect();
+
                 }
             }
         });
@@ -667,7 +666,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
             @Override
             public void run() {
                 if (mScanning) // Acreo_johros: only call stopScan() if still
-                               // scanning
+                    // scanning
                     stopScan();
             }
         }, 10000);
@@ -678,9 +677,16 @@ public class AcMainScreen extends Activity implements IRefreshable {
      * disconnect from the Bluetooth Gatt Service. Remove insoles connection
      */
     private void disconnectDevice() {
-
+        //connection_toggle.setText("OFF");
         readDataFromFirstRightInsole = true;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
+                connection_toggle.setText("OFF");
+
+            }
+        });
         Thread thread = new Thread(new Runnable() {
 
             @Override
@@ -704,7 +710,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
                         mDataServiceRight = null;
                         mBatteryServiceRight = null;
 
-                        mBluetoothLeServiceRight.writeCharacteristic(controlCharacteristic, new byte[] { (byte) 0x00 });
+                        mBluetoothLeServiceRight.writeCharacteristic(controlCharacteristic, new byte[]{(byte) 0x00});
                         Thread.sleep(100);
                         mBluetoothLeServiceRight.setCharacteristicNotification(samplesCharacteristic, false);
                         Thread.sleep(100);
@@ -739,7 +745,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
                         mDataServiceLeft = null;
                         mBatteryServiceLeft = null;
 
-                        mBluetoothLeServiceLeft.writeCharacteristic(controlCharacteristic, new byte[] { (byte) 0x00 });
+                        mBluetoothLeServiceLeft.writeCharacteristic(controlCharacteristic, new byte[]{(byte) 0x00});
                         Thread.sleep(100);
                         mBluetoothLeServiceLeft.setCharacteristicNotification(samplesCharacteristic, false);
                         Thread.sleep(100);
@@ -847,7 +853,6 @@ public class AcMainScreen extends Activity implements IRefreshable {
      * Refresh connection to insoles
      */
     // private boolean isAutoRefreshFunctionalityActivated = false;
-
     private void connectToInsolesActomatically() {
         if (RefreshConnectionHelper.isRefreshTaskActive()) {
             return;
@@ -860,7 +865,14 @@ public class AcMainScreen extends Activity implements IRefreshable {
         // appendLoggerMessage("Device disconnected. Starting autoconnection...");
         // isAutoRefreshFunctionalityActivated = true;
         disconnectDevice();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
+                connection_toggle.setText("ON");
+
+            }
+        });
         handler.postDelayed(new Runnable() {
 
             @Override
@@ -919,9 +931,9 @@ public class AcMainScreen extends Activity implements IRefreshable {
         }
 
         RefreshConnectionTask mRefreshConnectionTask;
-        
+
         private static class RefreshConnectionTask extends AsyncTask<Integer, Void, Void> {
-            
+
             private String TAG = "RefreshConnectionTask";
             private boolean canWork = true;
 
@@ -1071,7 +1083,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
         mDeviceInfoList = new ArrayList<BleDeviceInfo>();
         mDeviceFilter = new String[2];
         mDeviceFilter[0] = "Wiisel_Left "; // note that "Wiisel_Left " ends with
-                                           // a blank space
+        // a blank space
         mDeviceFilter[1] = "Wiisel_Right";
         // Resources res = getResources();
         // mDeviceFilter = res.getStringArray(R.array.device_filter);
@@ -1278,19 +1290,19 @@ public class AcMainScreen extends Activity implements IRefreshable {
             if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
                 // Bluetooth adapter state change
                 switch (mBtAdapter.getState()) {
-                case BluetoothAdapter.STATE_ON:
-                    // startBluetoothLeServiceRight();
-                    appendLoggerMessage("Bluetooth is enabled");
+                    case BluetoothAdapter.STATE_ON:
+                        // startBluetoothLeServiceRight();
+                        appendLoggerMessage("Bluetooth is enabled");
 
-                    break;
-                case BluetoothAdapter.STATE_OFF:
-                    // Toast.makeText(context, R.string.mess_closing, Toast.LENGTH_LONG).show();
-                    // finish();
-                    appendLoggerMessage("Bluetooth is disabled");
-                    break;
-                default:
-                    WiiselApplication.showLog("d", "Action STATE CHANGED not processed");
-                    break;
+                        break;
+                    case BluetoothAdapter.STATE_OFF:
+                        // Toast.makeText(context, R.string.mess_closing, Toast.LENGTH_LONG).show();
+                        // finish();
+                        appendLoggerMessage("Bluetooth is disabled");
+                        break;
+                    default:
+                        WiiselApplication.showLog("d", "Action STATE CHANGED not processed");
+                        break;
                 }
             } else if (BluetoothLeServiceRight.ACTION_GATT_CONNECTED.equals(action)) {
                 // GATT connect
@@ -1511,7 +1523,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
             } else if (BluetoothLeServiceRight.ACTION_DATA_WRITE.equals(action)) {
                 String time_uuid = AppConstants.UUID_LOCAL_TIME.toString();
                 int status = intent.getIntExtra(BluetoothLeServiceRight.EXTRA_STATUS, BluetoothGatt.GATT_FAILURE); // Acreo_johros:
-                                                                                                                   // added
+                // added
 
                 if (intent.getExtras().get(BluetoothLeServiceRight.EXTRA_UUID).equals(time_uuid)) {
                     // an acknowledgement of a write to right insole local clock
@@ -1560,7 +1572,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
                 String time_uuid = AppConstants.UUID_LOCAL_TIME.toString();
                 String control_uuid = AppConstants.UUID_CONTROL.toString();
                 int status = intent.getIntExtra(BluetoothLeServiceLeft.EXTRA_STATUS, BluetoothGatt.GATT_FAILURE); // Acreo_johros:
-                                                                                                                  // added
+                // added
 
                 if (intent.getExtras().get(BluetoothLeServiceLeft.EXTRA_UUID).equals(time_uuid)) {
                     // an acknowledgement of a write to right insole local clock
@@ -1598,7 +1610,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
                         // start data stream from left insole
                         BluetoothGattCharacteristic controlCharacteristic =
                                 mDataServiceLeft.getCharacteristic(AppConstants.UUID_CONTROL);
-                        mBluetoothLeServiceLeft.writeCharacteristic(controlCharacteristic, new byte[] { (byte) 0xf3 });
+                        mBluetoothLeServiceLeft.writeCharacteristic(controlCharacteristic, new byte[]{(byte) 0xf3});
                     }
                 } else if (intent.getExtras().get(BluetoothLeServiceLeft.EXTRA_UUID).equals(control_uuid)) {
                     // Acreo_johros: check that control command was not the stop
@@ -1611,7 +1623,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
                     // succesfully having started stream from left insole
                     BluetoothGattCharacteristic controlCharacteristic =
                             mDataServiceRight.getCharacteristic(AppConstants.UUID_CONTROL);
-                    mBluetoothLeServiceRight.writeCharacteristic(controlCharacteristic, new byte[] { (byte) 0xf3 });
+                    mBluetoothLeServiceRight.writeCharacteristic(controlCharacteristic, new byte[]{(byte) 0xf3});
 
                     // Acreo_johros: start battery checkers and RSSI checkers
                     if (mBatteryServiceRight != null) {
@@ -1676,7 +1688,9 @@ public class AcMainScreen extends Activity implements IRefreshable {
         } else {
             Log.d("BLE device Battery", "Null");
         }
-    };
+    }
+
+    ;
 
     private void drawRightBatteryLevel(byte batt) {
         if (right_battery_level != null) {
@@ -1697,7 +1711,9 @@ public class AcMainScreen extends Activity implements IRefreshable {
         } else {
             Log.d("BLE device Battery", "Null");
         }
-    };
+    }
+
+    ;
 
     Runnable mLeftTimestamp = new Runnable() {
         @Override
@@ -1763,7 +1779,9 @@ public class AcMainScreen extends Activity implements IRefreshable {
         }
         mBluetoothLeServiceLeft.writeCharacteristic(timestampCharacteristic, bytes);
         return true;
-    };
+    }
+
+    ;
 
     private boolean setTimeStampRight(int time) {
         if (mDataServiceRight == null) {
@@ -1779,7 +1797,9 @@ public class AcMainScreen extends Activity implements IRefreshable {
         }
         mBluetoothLeServiceRight.writeCharacteristic(timestampCharacteristic, bytes);
         return true;
-    };
+    }
+
+    ;
 
     Runnable mLeftRssiChecker = new Runnable() {
         @Override
@@ -1834,7 +1854,9 @@ public class AcMainScreen extends Activity implements IRefreshable {
 
             }
         });
-    };
+    }
+
+    ;
 
     private void drawRightSignalStrength(final int rssi) {
         handler.post(new Runnable() {
