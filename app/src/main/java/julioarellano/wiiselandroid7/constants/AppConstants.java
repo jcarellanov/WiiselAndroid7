@@ -43,7 +43,7 @@ public class AppConstants {
     public static final String PREFERENCES_AUTOAUTH = "auto_authorization";
     public static final String PREFERENCES_FALLDETECT = "fall_detection";
     public static final String PREFERENCES_ACCELEROMETERSENSITIVITY = "accelerometer_sens";
-    public static final String PREFERENCES_NOMOVEMENTSENSITIVITY = "no_movement_sensivity";
+    public static final String PREFERENCES_NOMOVEMENTSENSITIVITY = "no_movement_sensitivity";
     public static final String PREFERENCES_PERMITED_ANGLE = "permited_angle";
     public static final String PREFERENCES_FIRSTNAME = "first_name";
     public static final String PREFERENCES_LASTNAME = "last_name";
@@ -53,7 +53,7 @@ public class AppConstants {
     public static final String PREFERENCES_CLIMGENERALMODE = "data_mode";
     public static final String PREFERENCES_USEDEFAULT = "use_default";
     public static final String PREFERENCES_DELAY_TIME = "delay_time";
-    public static final String PREFERENCES_PRESS_SENSITIVITY = "pressure_sevsitivity";
+    public static final String PREFERENCES_PRESS_SENSITIVITY = "pressure_sensitivity";
     
     // DEFAULT VALUE
     public static final int DEFAULT_TIMERALARM = 35000;
@@ -69,6 +69,7 @@ public class AppConstants {
     public static final boolean DEFAULT_SHOW_LOGGER = false;
     public static final int DEFAULT_DELAY_TIME = 5;
     public static final int DEFAULT_PRESS_SENSITIVITY = 200;
+    public static String lastMessage = "";
 
     // download directory
     public static final String DOWNLOAD_DIR = "WiiselDataDir";

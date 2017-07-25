@@ -47,8 +47,7 @@
             android:layout_toLeftOf="@+id/iv_triangle_action_mode"
             android:background="@drawable/message_btn_background"
             android:padding="@dimen/padding_image_small_main_screen"
-            android:visibility="gone" >
-        </RelativeLayout>
+            android:visibility="gone"></RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/btn_rl_settings_image_main"

@@ -11,6 +11,7 @@ import android.content.SharedPreferences.Editor;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -50,6 +51,8 @@ public class ConnectionManager {
     private static final String LOGIN_URL = "/api/v1/tokens";
     private static final String ALARM_URL = "/api/v1/data/alert";
     private static final String DATA_UPDATE = "/api/v1/data/reload";
+    private String msg = "";
+
 
     private static String HOST = "";
 
@@ -66,6 +69,8 @@ public class ConnectionManager {
         }
         return manager;
     }
+
+
 
     /**
      * 
@@ -116,6 +121,15 @@ public class ConnectionManager {
 
             editor.commit();
         }
+        /*else{
+            msg = jsonObject.getString(AppConstants.PARAM_MESSAGE);
+            SharedPreferences sharedPreferences = ctx.getSharedPreferences(ctx.getResources().getString(R.string.app_name),
+                    Context.MODE_PRIVATE);
+            Editor editor = sharedPreferences.edit();
+            editor.putString(msg,AppConstants.lastMessage);
+
+            return response;
+        }*/
         return response;
     }
 
@@ -413,7 +427,8 @@ public class ConnectionManager {
      * @throws Exception
      */
     public JSONObject fromHttpToJson(HttpResponse response) throws Exception {
-        InputStream content = response.getEntity().getContent();
+        HttpEntity entity = response.getEntity();
+        InputStream content = entity.getContent();
         byte[] buffer = new byte[1024];
         StringBuilder jsonResponse = new StringBuilder();
         while (content.read(buffer) > 0) {

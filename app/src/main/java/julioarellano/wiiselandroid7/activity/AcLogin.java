@@ -71,17 +71,17 @@ public class AcLogin extends Activity {
                             try {
                                 HttpResponse serverLoginResponse = connectionManager.serverLogin(emailText, passText);
                                 int statusCode = serverLoginResponse.getStatusLine().getStatusCode();
-                                if (statusCode != HttpStatus.SC_OK) {
+                                if (statusCode == HttpStatus.SC_UNAUTHORIZED) {
 
-                                    JSONObject fromHttpToJson = connectionManager.fromHttpToJson(serverLoginResponse);
-                                    final String msg = fromHttpToJson.getString(AppConstants.PARAM_MESSAGE);
+                                    //JSONObject fromHttpToJson = connectionManager.fromHttpToJson(serverLoginResponse);
+                                    //final String msg = fromHttpToJson.getString(AppConstants.PARAM_MESSAGE);
 
                                     handler.post(new Runnable() {
 
                                         @Override
                                         public void run() {
                                             progressDialog.dismiss();
-                                            CustomToast.makeText(AcLogin.this, msg, Toast.LENGTH_SHORT).show();
+                                            CustomToast.makeText(AcLogin.this, "Invalid username or password", Toast.LENGTH_LONG).show();
                                         }
                                     });
 
@@ -89,6 +89,7 @@ public class AcLogin extends Activity {
                                 }
 
                             } catch (Exception e) {
+
                                 handler.post(new Runnable() {
 
                                     @Override
