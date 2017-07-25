@@ -52,7 +52,7 @@
 
         <RelativeLayout
             android:id="@+id/btn_rl_connection_toggle"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/btn_rl_settings_image_main"
@@ -230,7 +230,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_weight="0.17"
+                android:layout_weight="0.2"
                 android:contentDescription="@string/image"
                 android:src="@drawable/failure" />
 
