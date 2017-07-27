@@ -33,7 +33,7 @@
     <string name="image">image</string>
     <string name="timer">Timer</string>
     <string name="first_insole">Right insole</string>
-    <string name="second_insole">Left insole </string>
+    <string name="second_insole">Left insole</string>
     <string name="num_of_st">Number of steps</string>
     <string name="active_time">Active time</string>
     <string name="walk_dist">Walking distance</string>

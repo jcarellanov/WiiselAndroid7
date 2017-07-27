@@ -463,7 +463,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
         right_battery_level = (ImageView) findViewById(R.id.iv_right_battery);
         left_battery_level = (ImageView) findViewById(R.id.iv_left_battery);
 
-        connection_toggle.setOnClickListener(new OnClickListener() {
+        findViewById(R.id.toggleButton).setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View view) {

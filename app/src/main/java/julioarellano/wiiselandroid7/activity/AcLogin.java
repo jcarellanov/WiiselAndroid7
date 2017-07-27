@@ -81,7 +81,7 @@ public class AcLogin extends Activity {
                                         @Override
                                         public void run() {
                                             progressDialog.dismiss();
-                                            CustomToast.makeText(AcLogin.this, "Invalid username or password", Toast.LENGTH_LONG).show();
+                                            CustomToast.makeText(AcLogin.this, "Invalid email or password", Toast.LENGTH_LONG).show();
                                         }
                                     });
 

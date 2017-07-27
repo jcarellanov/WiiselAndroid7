@@ -61,8 +61,8 @@
 
             <Button
                 android:id="@+id/toggleButton"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_above="@+id/tv_connection_state"
                 android:text="ToggleButton"
                 tools:text="Off" />
@@ -73,7 +73,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:text="@string/connection_state"
+                android:layout_centerVertical="true"
+                android:text="@string/connect"
                 android:textColor="@android:color/background_dark" />
 
         </RelativeLayout>
@@ -216,10 +217,11 @@
 
             <TextView
                 android:id="@+id/tv_left_isole"
-                android:layout_width="145dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
+                android:layout_weight="0.4"
                 android:gravity="center_vertical"
                 android:text="@string/insole_l"
                 android:textSize="@dimen/main_text_status_size"
