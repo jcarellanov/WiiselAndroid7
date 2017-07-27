@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import julioarellano.wiiselandroid7.R;
 import julioarellano.wiiselandroid7.constants.AppConstants;
 import julioarellano.wiiselandroid7.manager.ConnectionManager;
+import julioarellano.wiiselandroid7.manager.HttpUrlConnectionManager;
 import julioarellano.wiiselandroid7.service.BluetoothLeServiceLeft;
 import julioarellano.wiiselandroid7.service.BluetoothLeServiceRight;
 import julioarellano.wiiselandroid7.utils.CustomToast;
@@ -44,6 +45,7 @@ public class AcLogin extends Activity {
         email = (EditText) findViewById(R.id.et_email_input);
         password = (EditText) findViewById(R.id.et_password_input);
 
+
         findViewById(R.id.btn_sign_on_login).setOnClickListener(new OnClickListener() {
 
             ProgressDialog progressDialog = new ProgressDialog(AcLogin.this);
@@ -61,27 +63,30 @@ public class AcLogin extends Activity {
                     progressDialog.setMessage(getString(R.string.mess_wait));
                     progressDialog.show();
 
+
                     Thread thread = new Thread(new Runnable() {
 
                         @Override
                         public void run() {
                             ConnectionManager connectionManager = ConnectionManager
                                     .getInstance(getApplicationContext());
+                            HttpUrlConnectionManager httpURLConnectionManager = HttpUrlConnectionManager.getInstance(getApplicationContext());
 
                             try {
-                                HttpResponse serverLoginResponse = connectionManager.serverLogin(emailText, passText);
-                                int statusCode = serverLoginResponse.getStatusLine().getStatusCode();
-                                if (statusCode == HttpStatus.SC_UNAUTHORIZED) {
+                                //HttpResponse serverLoginResponse = connectionManager.serverLogin(emailText, passText);
+                                final String msg = httpURLConnectionManager.serverLogin(emailText,passText);
 
-                                    //JSONObject fromHttpToJson = connectionManager.fromHttpToJson(serverLoginResponse);
-                                    //final String msg = fromHttpToJson.getString(AppConstants.PARAM_MESSAGE);
+                             //int statusCode = serverLoginResponse.getStatusLine().getStatusCode();
+
+
+                                if (msg == "Invalid email or password" || msg == "unsuccessful" ) {
 
                                     handler.post(new Runnable() {
 
                                         @Override
                                         public void run() {
                                             progressDialog.dismiss();
-                                            CustomToast.makeText(AcLogin.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+                                            CustomToast.makeText(AcLogin.this, msg, Toast.LENGTH_SHORT).show();
                                         }
                                     });
 
