@@ -79,7 +79,7 @@ public class AcLogin extends Activity {
                              //int statusCode = serverLoginResponse.getStatusLine().getStatusCode();
 
 
-                                if (msg == "Invalid email or password" || msg == "unsuccessful" ) {
+
 
                                     handler.post(new Runnable() {
 
@@ -89,6 +89,7 @@ public class AcLogin extends Activity {
                                             CustomToast.makeText(AcLogin.this, msg, Toast.LENGTH_SHORT).show();
                                         }
                                     });
+                                if (msg == "Invalid email or password" || msg == "Check internet connection" ) {
 
                                     return;
                                 }

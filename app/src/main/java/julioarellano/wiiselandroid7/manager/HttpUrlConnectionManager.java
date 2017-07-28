@@ -118,7 +118,7 @@ public class HttpUrlConnectionManager {
             message = "Invalid email or password";
 
         } else {
-            message = "unsuccessful";
+            message = "Check internet connection";
         }
 
 
