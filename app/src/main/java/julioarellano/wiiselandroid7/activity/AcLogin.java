@@ -13,10 +13,6 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.json.JSONObject;
-
 import julioarellano.wiiselandroid7.R;
 import julioarellano.wiiselandroid7.constants.AppConstants;
 import julioarellano.wiiselandroid7.manager.ConnectionManager;
@@ -24,7 +20,6 @@ import julioarellano.wiiselandroid7.manager.HttpUrlConnectionManager;
 import julioarellano.wiiselandroid7.service.BluetoothLeServiceLeft;
 import julioarellano.wiiselandroid7.service.BluetoothLeServiceRight;
 import julioarellano.wiiselandroid7.utils.CustomToast;
-
 
 
 /**
@@ -74,22 +69,20 @@ public class AcLogin extends Activity {
 
                             try {
                                 //HttpResponse serverLoginResponse = connectionManager.serverLogin(emailText, passText);
-                                final String msg = httpURLConnectionManager.serverLogin(emailText,passText);
+                                final String msg = httpURLConnectionManager.serverLogin(emailText, passText);
 
-                             //int statusCode = serverLoginResponse.getStatusLine().getStatusCode();
-
-
+                                //int statusCode = serverLoginResponse.getStatusLine().getStatusCode();
 
 
-                                    handler.post(new Runnable() {
+                                handler.post(new Runnable() {
 
-                                        @Override
-                                        public void run() {
-                                            progressDialog.dismiss();
-                                            CustomToast.makeText(AcLogin.this, msg, Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                if (msg == "Invalid email or password" || msg == "Check internet connection" ) {
+                                    @Override
+                                    public void run() {
+                                        progressDialog.dismiss();
+                                        CustomToast.makeText(AcLogin.this, msg, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                if (msg == "Invalid email or password" || msg == "Check internet connection") {
 
                                     return;
                                 }
@@ -111,19 +104,18 @@ public class AcLogin extends Activity {
                             }
 
                             try {
-                                HttpResponse updateUserData = connectionManager.updateUserData();
-                                int statusCode = updateUserData.getStatusLine().getStatusCode();
-                                if (statusCode != HttpStatus.SC_OK) {
-                                    JSONObject fromHttpToJson = connectionManager.fromHttpToJson(updateUserData);
+                                //HttpResponse updateUserData = connectionManager.updateUserData();
+                                final String updateMessage = httpURLConnectionManager.updateUserData();
+                                //int statusCode = updateUserData.getStatusLine().getStatusCode();
+                                if (updateMessage != "Update successful") {
 
-                                    final String msg = fromHttpToJson.getString(AppConstants.PARAM_MESSAGE);
                                     handler.post(new Runnable() {
 
                                         @Override
                                         public void run() {
                                             progressDialog.dismiss();
                                             removeToken();
-                                            CustomToast.makeText(AcLogin.this, msg, Toast.LENGTH_SHORT).show();
+                                            CustomToast.makeText(AcLogin.this, updateMessage, Toast.LENGTH_SHORT).show();
                                         }
                                     });
 
@@ -187,8 +179,12 @@ public class AcLogin extends Activity {
 
             @Override
             public void run() {
-                ConnectionManager.getInstance(getApplicationContext()).updateUserData();
-                
+                //ConnectionManager.getInstance(getApplicationContext()).updateUserData();
+                try {
+                    HttpUrlConnectionManager.getInstance(getApplicationContext()).updateUserData();
+                } catch (java.lang.Exception e) {
+                    e.printStackTrace();
+                }
                 waitDialog.dismiss();
 
                 // Load everything after done
