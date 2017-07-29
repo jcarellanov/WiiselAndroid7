@@ -159,7 +159,7 @@ public class HttpUrlConnectionManager {
             message = "Check internet connection";
         }
 
-
+        conn.disconnect();
         return message;
 
     }
@@ -313,7 +313,7 @@ public class HttpUrlConnectionManager {
 
         }
 
-
+        conn.disconnect();
         return message;
     }
 
