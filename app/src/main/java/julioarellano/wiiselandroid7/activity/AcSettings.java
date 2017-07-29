@@ -21,14 +21,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.json.JSONObject;
-
 import julioarellano.wiiselandroid7.R;
 import julioarellano.wiiselandroid7.application.WiiselApplication;
 import julioarellano.wiiselandroid7.constants.AppConstants;
-import julioarellano.wiiselandroid7.manager.ConnectionManager;
+import julioarellano.wiiselandroid7.manager.HttpUrlConnectionManager;
 import julioarellano.wiiselandroid7.service.AccelerometerService;
 import julioarellano.wiiselandroid7.service.BluetoothLeServiceLeft;
 import julioarellano.wiiselandroid7.service.BluetoothLeServiceRight;
@@ -138,13 +134,13 @@ public class AcSettings extends Activity implements OnCheckedChangeListener, OnC
         cbShowLogger.setChecked(sharedPreferences.getBoolean(AppConstants.PREFERENCES_SHOW_LOGGER, AppConstants.DEFAULT_SHOW_LOGGER));
 
         sbAccelerometerSensitivity.setProgress(sharedPreferences.getInt(AppConstants.PREFERENCES_ACCELEROMETERSENSITIVITY,
-            AppConstants.DEFAULT_ACCELEROMETERSENSITIVITY));
+                AppConstants.DEFAULT_ACCELEROMETERSENSITIVITY));
         sbPermitedAngle.setProgress(sharedPreferences.getInt(AppConstants.PREFERENCES_PERMITED_ANGLE, AppConstants.DEFAULT_PERMITED_ANGLE));
         sbNoMovementAcceleration.setProgress(sharedPreferences.getInt(AppConstants.PREFERENCES_NOMOVEMENTSENSITIVITY,
-            AppConstants.DEFAULT_NOMOVEMENTSENSITIVITY));
+                AppConstants.DEFAULT_NOMOVEMENTSENSITIVITY));
         sbDelayTime.setProgress(sharedPreferences.getInt(AppConstants.PREFERENCES_DELAY_TIME, AppConstants.DEFAULT_DELAY_TIME));
         sbPressSensorsSensitivity.setProgress(sharedPreferences.getInt(AppConstants.PREFERENCES_PRESS_SENSITIVITY,
-            AppConstants.DEFAULT_PRESS_SENSITIVITY));
+                AppConstants.DEFAULT_PRESS_SENSITIVITY));
 
         wasChanged = false;
     }
@@ -153,23 +149,23 @@ public class AcSettings extends Activity implements OnCheckedChangeListener, OnC
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         wasChanged = true;
         switch (buttonView.getId()) {
-        case R.id.cb_deff:
-            cbStartAuto.setEnabled(!isChecked);
-            cbAutoAuth.setEnabled(!isChecked);
-            cbAutoConnect.setEnabled(!isChecked);
-            cbFallDetect.setEnabled(!isChecked);
-            cbShowLogger.setEnabled(!isChecked);
+            case R.id.cb_deff:
+                cbStartAuto.setEnabled(!isChecked);
+                cbAutoAuth.setEnabled(!isChecked);
+                cbAutoConnect.setEnabled(!isChecked);
+                cbFallDetect.setEnabled(!isChecked);
+                cbShowLogger.setEnabled(!isChecked);
 
-            sbAccelerometerSensitivity.setEnabled(!isChecked);
-            sbPermitedAngle.setEnabled(!isChecked);
-            sbNoMovementAcceleration.setEnabled(!isChecked);
-            sbDelayTime.setEnabled(!isChecked);
-            sbPressSensorsSensitivity.setEnabled(!isChecked);
+                sbAccelerometerSensitivity.setEnabled(!isChecked);
+                sbPermitedAngle.setEnabled(!isChecked);
+                sbNoMovementAcceleration.setEnabled(!isChecked);
+                sbDelayTime.setEnabled(!isChecked);
+                sbPressSensorsSensitivity.setEnabled(!isChecked);
 
-            if (isChecked) {
-                setDefault();
-            }
-            break;
+                if (isChecked) {
+                    setDefault();
+                }
+                break;
         }
     }
 
@@ -194,13 +190,13 @@ public class AcSettings extends Activity implements OnCheckedChangeListener, OnC
         cbShowLogger.setChecked(sharedPreferences.getBoolean(AppConstants.PREFERENCES_SHOW_LOGGER, AppConstants.DEFAULT_SHOW_LOGGER));
 
         sbAccelerometerSensitivity.setProgress(sharedPreferences.getInt(AppConstants.PREFERENCES_ACCELEROMETERSENSITIVITY,
-            AppConstants.DEFAULT_ACCELEROMETERSENSITIVITY));
+                AppConstants.DEFAULT_ACCELEROMETERSENSITIVITY));
         sbPermitedAngle.setProgress(sharedPreferences.getInt(AppConstants.PREFERENCES_PERMITED_ANGLE, AppConstants.DEFAULT_PERMITED_ANGLE));
         sbNoMovementAcceleration.setProgress(sharedPreferences.getInt(AppConstants.PREFERENCES_NOMOVEMENTSENSITIVITY,
-            AppConstants.DEFAULT_NOMOVEMENTSENSITIVITY));
+                AppConstants.DEFAULT_NOMOVEMENTSENSITIVITY));
         sbDelayTime.setProgress(sharedPreferences.getInt(AppConstants.PREFERENCES_DELAY_TIME, AppConstants.DEFAULT_DELAY_TIME));
         sbPressSensorsSensitivity.setProgress(sharedPreferences.getInt(AppConstants.PREFERENCES_PRESS_SENSITIVITY,
-            AppConstants.DEFAULT_PRESS_SENSITIVITY));
+                AppConstants.DEFAULT_PRESS_SENSITIVITY));
     }
 
     private void storeSettings() {
@@ -233,52 +229,53 @@ public class AcSettings extends Activity implements OnCheckedChangeListener, OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-        case R.id.btn_rl_refresh_update:
-            // update user information from server
-            Thread thread = new Thread(new Runnable() {
+            case R.id.btn_rl_refresh_update:
+                // update user information from server
+                Thread thread = new Thread(new Runnable() {
 
-                @Override
-                public void run() {
-                    ConnectionManager manager = ConnectionManager.getInstance(getApplicationContext());
-                    try {
-                        HttpResponse updateUserData = manager.updateUserData();
+                    @Override
+                    public void run() {
+                        //ConnectionManager manager = ConnectionManager.getInstance(getApplicationContext());
+                        HttpUrlConnectionManager httpURLConnectionManager = HttpUrlConnectionManager.getInstance(getApplicationContext());
 
-                        int statusCode = updateUserData.getStatusLine().getStatusCode();
-                        if (statusCode != HttpStatus.SC_OK) {
-                            JSONObject fromHttpToJson = manager.fromHttpToJson(updateUserData);
-
-                            String msg = fromHttpToJson.getString(AppConstants.PARAM_MESSAGE);
-                            Toast.makeText(AcSettings.this, msg, Toast.LENGTH_SHORT).show();
-                            return;
+                        try {
+                            //HttpResponse updateUserData = manager.updateUserData();
+                            String updateMessageAttempt = httpURLConnectionManager.updateUserData();
+                            //int statusCode = updateUserData.getStatusLine().getStatusCode();
+                            if (updateMessageAttempt != "Update successful") {
+                                //JSONObject fromHttpToJson = manager.fromHttpToJson(updateUserData);
+                                //String msg = fromHttpToJson.getString(AppConstants.PARAM_MESSAGE);
+                                Toast.makeText(AcSettings.this, updateMessageAttempt, Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
-                }
-            });
-            thread.start();
-            break;
-        case R.id.btn_save_settings_screen:
-            storeSettings();
-            break;
-        case R.id.btn_test_details_settings_screen:
-            Intent intent = new Intent(AcSettings.this, AcDetails.class);
-            startActivity(intent);
-            break;
-        case R.id.btn_log_out:
-            Intent intent2 = new Intent(AcSettings.this, AccelerometerService.class);
-            stopService(intent2);
+                });
+                thread.start();
+                break;
+            case R.id.btn_save_settings_screen:
+                storeSettings();
+                break;
+            case R.id.btn_test_details_settings_screen:
+                Intent intent = new Intent(AcSettings.this, AcDetails.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_log_out:
+                Intent intent2 = new Intent(AcSettings.this, AccelerometerService.class);
+                stopService(intent2);
 
-            // delete token and log out from the application
-            sharedPreferences.edit().remove(AppConstants.PREFERENCES_TOKEN).commit();
+                // delete token and log out from the application
+                sharedPreferences.edit().remove(AppConstants.PREFERENCES_TOKEN).commit();
 
-            setResult(AppConstants.REQUEST_SETTINGSONACTIVITYRESULT);
-            finish();
-            break;
-        case R.id.btn_calibration_settings_screen:
-            WiiselApplication.isCalibrationMode = true;
-            finish();
-            break;
+                setResult(AppConstants.REQUEST_SETTINGSONACTIVITYRESULT);
+                finish();
+                break;
+            case R.id.btn_calibration_settings_screen:
+                WiiselApplication.isCalibrationMode = true;
+                finish();
+                break;
         }
 
     }
@@ -293,21 +290,21 @@ public class AcSettings extends Activity implements OnCheckedChangeListener, OnC
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         wasChanged = true;
         switch (seekBar.getId()) {
-        case R.id.sb_accelerometer_sensitivity:
-            ((TextView) findViewById(R.id.tv_accelerometer_sensitivity_label)).setText(progress + "");
-            break;
-        case R.id.sb_allowed_angle:
-            ((TextView) findViewById(R.id.tv_allowed_angle_label)).setText(progress + "");
-            break;
-        case R.id.sb_no_movement_acceleration:
-            ((TextView) findViewById(R.id.tv_no_movement_acceleration_label)).setText(progress + "");
-            break;
-        case R.id.sb_delay_time:
-            ((TextView) findViewById(R.id.tv_delay_time_label)).setText(progress + "");
-            break;
-        case R.id.sb_press_sensors_sensitivity:
-            ((TextView) findViewById(R.id.tv_press_sensors_sensitivity_label)).setText(progress + "");
-            break;
+            case R.id.sb_accelerometer_sensitivity:
+                ((TextView) findViewById(R.id.tv_accelerometer_sensitivity_label)).setText(progress + "");
+                break;
+            case R.id.sb_allowed_angle:
+                ((TextView) findViewById(R.id.tv_allowed_angle_label)).setText(progress + "");
+                break;
+            case R.id.sb_no_movement_acceleration:
+                ((TextView) findViewById(R.id.tv_no_movement_acceleration_label)).setText(progress + "");
+                break;
+            case R.id.sb_delay_time:
+                ((TextView) findViewById(R.id.tv_delay_time_label)).setText(progress + "");
+                break;
+            case R.id.sb_press_sensors_sensitivity:
+                ((TextView) findViewById(R.id.tv_press_sensors_sensitivity_label)).setText(progress + "");
+                break;
         }
     }
 

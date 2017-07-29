@@ -17,13 +17,13 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
-import julioarellano.wiiselandroid7.utils.*;
 import julioarellano.wiiselandroid7.R;
 import julioarellano.wiiselandroid7.activity.interfaces.IRefreshable;
 import julioarellano.wiiselandroid7.activity.interfaces.SoundManagerListener;
 import julioarellano.wiiselandroid7.application.WiiselApplication;
 import julioarellano.wiiselandroid7.constants.AppConstants;
 import julioarellano.wiiselandroid7.manager.ConnectionManager;
+import julioarellano.wiiselandroid7.manager.HttpUrlConnectionManager;
 import julioarellano.wiiselandroid7.manager.PhoneStateManager;
 import julioarellano.wiiselandroid7.manager.SoundManager;
 import julioarellano.wiiselandroid7.utils.DelayedThread;
@@ -32,9 +32,6 @@ import julioarellano.wiiselandroid7.utils.FallLogicStage;
 import julioarellano.wiiselandroid7.utils.FallUtil;
 import julioarellano.wiiselandroid7.utils.InsolesUtil;
 import julioarellano.wiiselandroid7.utils.UIUtil;
-
-import org.apache.http.*;
-import org.json.JSONObject;
 
 public class AccelerometerService extends Service implements SensorEventListener, IRefreshable {
     private SensorManager mSensorManager = null;
@@ -254,19 +251,25 @@ public class AccelerometerService extends Service implements SensorEventListener
             public void run() {
 
                 ConnectionManager connectionManager = ConnectionManager.getInstance(AccelerometerService.this);
+                HttpUrlConnectionManager httpUrlConnectionManager = HttpUrlConnectionManager.getInstance(AccelerometerService.this);
 
                 // send EMAIL alarm to the server
                 try {
-                    HttpResponse response = connectionManager.fallDetectionAlarmNotifViaEmail();
-                    JSONObject fromHttpToJson = connectionManager.fromHttpToJson(response);
+                    //HttpResponse response = connectionManager.fallDetectionAlarmNotifViaEmail();
+                    final String emailResponse = httpUrlConnectionManager.fallDetectionAlarmNotifViaEmail();
+                  /*  JSONObject fromHttpToJson = connectionManager.fromHttpToJson(response);
                     final String msg = fromHttpToJson.getString(AppConstants.PARAM_MESSAGE);
                     WiiselApplication.showLog("d", msg);
-                    UIUtil.appendLoggerMessage(getApplicationContext(), "Send Email: " + msg);
+                    UIUtil.appendLoggerMessage(getApplicationContext(), "Send Email: " + msg);*/
+
+                    WiiselApplication.showLog("d", emailResponse);
+                    UIUtil.appendLoggerMessage(getApplicationContext(), "Send Email: " + emailResponse);
+
                     handler.post(new Runnable() {
 
                         @Override
                         public void run() {
-                            Toast.makeText(AccelerometerService.this, msg, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AccelerometerService.this, emailResponse, Toast.LENGTH_SHORT).show();
                         }
                     });
                 } catch (Exception e) {

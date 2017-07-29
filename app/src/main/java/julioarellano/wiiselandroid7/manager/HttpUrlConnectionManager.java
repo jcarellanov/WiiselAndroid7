@@ -351,7 +351,18 @@ public class HttpUrlConnectionManager {
         writer.flush();
         writer.close();
 
+        InputStream inputStream = conn.getInputStream();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder result = new StringBuilder();
+        String line;
 
+        while ((line = bufferedReader.readLine()) != null) {
+            result.append(line);
+        }
+        JSONObject jsonResponse = new JSONObject(result.toString());
+        message = jsonResponse.getString(AppConstants.PARAM_MESSAGE);
+
+        conn.disconnect();
         return message;
     }
 

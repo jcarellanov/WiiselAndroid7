@@ -97,7 +97,7 @@
 	<string name="mess_pleasereconnect">Please, authorize in the app one more time</string>
 	<string name="mess_patientfall">Notification about a patients fall: Patient %1$s fell over at %2$s</string>
 	<string name="mess_datawassaved">Data was saved.</string>
-	<string name="mess_alertdoesnotsent">Alert notification does not send. Server not respond.</string>
+	<string name="mess_alertdoesnotsent">Alert notification not sent. No response from server.</string>
 	<string name="mess_checkinternet">Please, check your internet connection or your settings.</string>
 	<string name="mess_falldetactivated">Fall detection activated</string>
 	<string name="refresh_ud">Refresh UD</string>
