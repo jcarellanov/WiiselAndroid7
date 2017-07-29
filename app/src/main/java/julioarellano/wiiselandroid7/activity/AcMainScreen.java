@@ -19,11 +19,18 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.NetworkInfo.State;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -160,6 +167,13 @@ public class AcMainScreen extends Activity implements IRefreshable {
         setContentView(R.layout.ac_main);
         createView();
         registerReceiver();
+
+        ///
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(noDataReceiver, intentFilter);
+        ///
+
         restoreViewStatus();
         mServiceListRight = new ArrayList<BluetoothGattService>();
         mServiceListLeft = new ArrayList<BluetoothGattService>();
@@ -772,6 +786,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
 
     @Override
     protected void onDestroy() {
+        unregisterReceiver(noDataReceiver);
         PhoneStateManager.getInstance().unsubscribe(this);
 
         try {
@@ -2145,5 +2160,70 @@ public class AcMainScreen extends Activity implements IRefreshable {
     public boolean hasConnectionStateBeenChanged() {
         return mPrevConnectionEstablished ^ mConnectionEstablished;
     }
+
+    BroadcastReceiver noDataReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle extras = intent.getExtras();
+
+            NetworkInfo info = (NetworkInfo) extras
+                    .getParcelable("networkInfo");
+
+            NetworkInfo.State state = info.getState();
+            if (state == State.DISCONNECTED) {
+                ConnectivityManager cm =
+                        (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                if (activeNetwork == null)
+                    AlertNetworkConnection();
+
+
+            }
+
+
+
+        }
+        };
+
+
+    public void AlertNetworkConnection() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("No Data Connection");
+        builder.setMessage("Please check connection settings");
+        builder.setNegativeButton("close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        soundAlert();
+        vibration();
+    }
+
+
+    public void soundAlert(){
+        try {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Vibrator vibration() {
+
+        Vibrator v = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+        long[] pattern = { 0, 3000, 3000 };
+
+        v.vibrate(pattern, -1);
+        return v;
+
+    }
+
 
 }
