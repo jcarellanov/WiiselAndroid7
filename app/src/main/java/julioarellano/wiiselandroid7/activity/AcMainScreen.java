@@ -2182,16 +2182,15 @@ public class AcMainScreen extends Activity implements IRefreshable {
             }
 
 
-
         }
-        };
+    };
 
 
     public void AlertNetworkConnection() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("No Data Connection");
-        builder.setMessage("Please check connection settings");
-        builder.setNegativeButton("close", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.no_data);
+        builder.setMessage(R.string.check_con_settings);
+        builder.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -2204,7 +2203,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
     }
 
 
-    public void soundAlert(){
+    public void soundAlert() {
         try {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
@@ -2218,7 +2217,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
 
         Vibrator v = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
-        long[] pattern = { 0, 3000, 3000 };
+        long[] pattern = {0, 3000, 3000};
 
         v.vibrate(pattern, -1);
         return v;

@@ -1,12 +1,15 @@
 package julioarellano.wiiselandroid7.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,6 +33,7 @@ public class AcLogin extends Activity {
     private EditText email;
     private EditText password;
     Handler handler = new Handler();
+    int MY_PERMISSIONS_ACCESS_FINE=300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,11 @@ public class AcLogin extends Activity {
 
         receiveDataOpen();
         setContentView(R.layout.ac_login);
+        if(Build.VERSION.SDK_INT>22){
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                MY_PERMISSIONS_ACCESS_FINE);}
+
         email = (EditText) findViewById(R.id.et_email_input);
         password = (EditText) findViewById(R.id.et_password_input);
 

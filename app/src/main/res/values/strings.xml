@@ -104,5 +104,9 @@
 	<string name="calibration">Calibration</string>
 	<string name="deff_opt">Use default options</string>
 	<string name="showlogger">Show logger:</string>
+    <string name="no_data">No Data Connection</string>
+    <string name="check_con_settings">Please check connection settings</string>
+    <string name="close">close</string>
+
 	
 </resources>
