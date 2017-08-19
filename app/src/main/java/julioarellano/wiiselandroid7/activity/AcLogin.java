@@ -185,7 +185,7 @@ public class AcLogin extends Activity {
 
             final boolean authenticated = sharedPreferences.getBoolean("authenticated", false);
 
-            if(true) {
+            if(authenticated) {
                 fingerImage.setVisibility(View.VISIBLE);
                 fingerImage.setOnClickListener(new OnClickListener() {
                     @Override

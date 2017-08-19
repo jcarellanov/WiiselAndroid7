@@ -53,8 +53,6 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
 
     public void onAuthenticationError(int errMsgId, CharSequence errString) {
 
-        //I’m going to display the results of fingerprint authentication as a series of toasts.
-        //Here, I’m creating the message that’ll be displayed if an error occurs//
 
 
         authMssg = "Authentication error\n" + errString;
@@ -74,7 +72,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
             }
         });
 
-        authMssg = "Authentication failed";
+
     }
 
     @Override
@@ -99,11 +97,11 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
                 HttpUrlConnectionManager httpUrlConnectionManager = HttpUrlConnectionManager.getInstance(context);
                 final SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name),
                         Context.MODE_PRIVATE);
+try{
+                String email = AESCrypt.decrypt(sharedPreferences.getString(PREFERENCES_EMAIL, ""));
+                String password = AESCrypt.decrypt(sharedPreferences.getString(PREFERENCES_PASSWORD, ""));
 
-                String email = sharedPreferences.getString(PREFERENCES_EMAIL, "");
-                String password = sharedPreferences.getString(PREFERENCES_PASSWORD, "");
 
-                try {
                     String msg = httpUrlConnectionManager.serverLogin(email, password);
                     if (!msg.equals("Sign in successful")) {
 

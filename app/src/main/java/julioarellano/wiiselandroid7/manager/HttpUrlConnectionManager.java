@@ -28,6 +28,7 @@ import julioarellano.wiiselandroid7.R;
 import julioarellano.wiiselandroid7.application.WiiselApplication;
 import julioarellano.wiiselandroid7.constants.AppConstants;
 import julioarellano.wiiselandroid7.service.UIService;
+import julioarellano.wiiselandroid7.utils.AESCrypt;
 import julioarellano.wiiselandroid7.utils.UIUtil;
 
 public class HttpUrlConnectionManager {
@@ -144,12 +145,14 @@ public class HttpUrlConnectionManager {
                     Context.MODE_PRIVATE);
             Editor editor = sharedPreferences.edit();
 
+            String encryptedPassword = AESCrypt.encrypt(password);
+            String encryptedEmail = AESCrypt.encrypt(email);
             editor.putString(AppConstants.PREFERENCES_TOKEN, token);
             editor.putString(AppConstants.PREFERENCES_FIRSTNAME, first_name);
             editor.putString(AppConstants.PREFERENCES_LASTNAME, last_name);
             editor.putString(AppConstants.PREFERENCES_CLPHONE, cl_phone);
-            editor.putString(AppConstants.PREFERENCES_EMAIL, email);
-            editor.putString(AppConstants.PREFERENCES_PASSWORD, password);
+            editor.putString(AppConstants.PREFERENCES_EMAIL, encryptedEmail);
+            editor.putString(AppConstants.PREFERENCES_PASSWORD, encryptedPassword);
             editor.putBoolean(AppConstants.PREFERENCES_AUTHENTICATED, true);
 
             editor.apply();
