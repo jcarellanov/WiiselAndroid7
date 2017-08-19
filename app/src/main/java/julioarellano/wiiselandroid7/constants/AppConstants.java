@@ -54,7 +54,11 @@ public class AppConstants {
     public static final String PREFERENCES_USEDEFAULT = "use_default";
     public static final String PREFERENCES_DELAY_TIME = "delay_time";
     public static final String PREFERENCES_PRESS_SENSITIVITY = "pressure_sensitivity";
-    
+    public static final String PREFERENCES_AUTHENTICATED = "authenticated";
+    public static final String PREFERENCES_EMAIL ="email";
+    public static final String PREFERENCES_PASSWORD ="password";
+
+
     // DEFAULT VALUE
     public static final int DEFAULT_TIMERALARM = 35000;
     public static final String DEFAULT_IPADDRESS = "81.169.151.83";
@@ -139,5 +143,5 @@ public class AppConstants {
 
     // LOGGER
     public static final String ACTION_APPEND_MESSAGE = "action_append_logger_message";
-    
+
 }

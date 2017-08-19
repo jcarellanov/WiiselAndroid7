@@ -2,18 +2,24 @@ package julioarellano.wiiselandroid7.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import julioarellano.wiiselandroid7.R;
@@ -33,7 +39,7 @@ public class AcLogin extends Activity {
     private EditText email;
     private EditText password;
     Handler handler = new Handler();
-    int MY_PERMISSIONS_ACCESS_FINE=300;
+    int MY_PERMISSIONS_ACCESS_FINE = 300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +47,22 @@ public class AcLogin extends Activity {
 
         receiveDataOpen();
         setContentView(R.layout.ac_login);
-        if(Build.VERSION.SDK_INT>22){
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                MY_PERMISSIONS_ACCESS_FINE);}
+
+        ImageView fingerImage = (ImageView) findViewById(R.id.FingerPrintImage);
+
+        if (Build.VERSION.SDK_INT > 22) { //API 23 and higher requires this in order to check BLE scan results
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_ACCESS_FINE);
+            enableLocationService();
+
+        }
+
 
         email = (EditText) findViewById(R.id.et_email_input);
         password = (EditText) findViewById(R.id.et_password_input);
 
+//text credentials login
 
         findViewById(R.id.btn_sign_on_login).setOnClickListener(new OnClickListener() {
 
@@ -75,12 +89,9 @@ public class AcLogin extends Activity {
                             ConnectionManager connectionManager = ConnectionManager
                                     .getInstance(getApplicationContext());
                             HttpUrlConnectionManager httpURLConnectionManager = HttpUrlConnectionManager.getInstance(getApplicationContext());
-
                             try {
                                 //HttpResponse serverLoginResponse = connectionManager.serverLogin(emailText, passText);
                                 final String msg = httpURLConnectionManager.serverLogin(emailText, passText);
-
-                                //int statusCode = serverLoginResponse.getStatusLine().getStatusCode();
 
 
                                 handler.post(new Runnable() {
@@ -91,7 +102,7 @@ public class AcLogin extends Activity {
                                         CustomToast.makeText(AcLogin.this, msg, Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                                if (msg == "Invalid email or password" || msg == "Check internet connection") {
+                                if (msg.equals("Invalid email or password") || msg.equals("Check internet connection")) {
 
                                     return;
                                 }
@@ -116,7 +127,7 @@ public class AcLogin extends Activity {
                                 //HttpResponse updateUserData = connectionManager.updateUserData();
                                 final String updateMessage = httpURLConnectionManager.updateUserData();
                                 //int statusCode = updateUserData.getStatusLine().getStatusCode();
-                                if (updateMessage != "Update successful") {
+                                if (!updateMessage.equals("Update successful")) {
 
                                     handler.post(new Runnable() {
 
@@ -164,19 +175,35 @@ public class AcLogin extends Activity {
             }
         });
 
-        findViewById(R.id.buttonDemo).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AcLogin.this, AcMainScreen.class);
-                startActivity(intent);
+
+        //Fingerprint Login
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            final SharedPreferences sharedPreferences = this.getSharedPreferences(this.getResources().getString(R.string.app_name),
+                    Context.MODE_PRIVATE);
+
+            final boolean authenticated = sharedPreferences.getBoolean("authenticated", false);
+
+            if(true) {
+                fingerImage.setVisibility(View.VISIBLE);
+                fingerImage.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(AcLogin.this, FingerLogin.class);
+                        startActivity(intent);
+                    }
+                });
             }
-        });
+
+        }
+
     }
 
     private void removeToken() {
         SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.app_name),
                 Context.MODE_PRIVATE);
-        sharedPreferences.edit().remove(AppConstants.PREFERENCES_TOKEN).commit();
+        sharedPreferences.edit().remove(AppConstants.PREFERENCES_TOKEN).apply();
     }
 
     private void receiveDataOpen() {
@@ -217,5 +244,44 @@ public class AcLogin extends Activity {
             }
         }).start();
     }
+
+    private boolean enableLocationService() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean providerEnabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER) |
+                lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (!providerEnabled) {
+            Resources res = getResources();
+            // notify user
+            final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setMessage(res.getString(R.string.EnablePositionService));
+            dialog.setPositiveButton(res.getString(android.R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                            paramDialogInterface.cancel();
+                        }
+                    });
+            dialog.setNegativeButton(res.getString(android.R.string.cancel),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                            paramDialogInterface.cancel();
+                            Toast.makeText(AcLogin.this,
+                                    R.string.LocationNotEnabled,
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+                        }//onClick
+                    });
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    dialog.show();
+                }
+            });
+
+        }//if
+        return providerEnabled;
+    }//enableLocationService
 
 }

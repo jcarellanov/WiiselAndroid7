@@ -107,6 +107,9 @@
     <string name="no_data">No Data Connection</string>
     <string name="check_con_settings">Please check connection settings</string>
     <string name="close">close</string>
+    <string name="EnablePositionService">Enable location services</string>
+    <string name="LocationNotEnabled">Location not enabled</string>
+    <string name="FingerPrompt">Please put your finger on the sensor</string>
 
 	
 </resources>

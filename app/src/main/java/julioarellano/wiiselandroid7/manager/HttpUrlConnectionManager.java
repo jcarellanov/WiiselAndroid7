@@ -148,8 +148,11 @@ public class HttpUrlConnectionManager {
             editor.putString(AppConstants.PREFERENCES_FIRSTNAME, first_name);
             editor.putString(AppConstants.PREFERENCES_LASTNAME, last_name);
             editor.putString(AppConstants.PREFERENCES_CLPHONE, cl_phone);
+            editor.putString(AppConstants.PREFERENCES_EMAIL, email);
+            editor.putString(AppConstants.PREFERENCES_PASSWORD, password);
+            editor.putBoolean(AppConstants.PREFERENCES_AUTHENTICATED, true);
 
-            editor.commit();
+            editor.apply();
             message = "Sign in successful";
 
         } else if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
@@ -282,6 +285,7 @@ public class HttpUrlConnectionManager {
             editor.putString(AppConstants.PREFERENCES_WALKDIST, walkDist);
             editor.putString(AppConstants.PREFERENCES_ACTTIME, activeTime);
             editor.putBoolean(AppConstants.PREFERENCES_SHOWAMPELSTATUS, showAmpel);
+            editor.putBoolean(AppConstants.PREFERENCES_AUTHENTICATED, true);
 
             editor.apply();
             message = "Update successful";
@@ -366,5 +370,44 @@ public class HttpUrlConnectionManager {
         return message;
     }
 
+    public String tokenLogin() throws Exception {
+        String message = "";
+
+        String token = getHost();
+
+        if (TextUtils.isEmpty(token)) {
+            Intent intent = new Intent(ctx, UIService.class);
+            intent.putExtra(AppConstants.EXTRA_TOAST, ctx.getString(R.string.mess_pleasereconnect));
+            ctx.startService(intent);
+            return null;
+        }
+
+
+        JSONObject request = new JSONObject();
+        request.put(AppConstants.PARAM_AUTHTOKEN, token);
+        URL url = new URL(HOST + DATA_UPDATE);
+        HttpURLConnection conn;
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setReadTimeout(READ_TIMEOUT);
+        conn.setConnectTimeout(CONNECTION_TIMEOUT);
+        conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+        conn.setDoInput(true);
+        conn.setDoOutput(true);
+        conn.setRequestMethod("POST");
+
+        conn.connect();
+        DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
+        writer.writeBytes(request.toString());
+        writer.flush();
+        writer.close();
+
+        int responseCode = conn.getResponseCode();
+
+        if (responseCode == HttpURLConnection.HTTP_OK)
+            message = "Sign in successful";
+        conn.disconnect();
+        return message;
+
+    }
 
 }

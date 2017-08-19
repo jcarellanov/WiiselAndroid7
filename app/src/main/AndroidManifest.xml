@@ -21,6 +21,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
 
     <application
@@ -57,6 +58,9 @@
             android:name="julioarellano.wiiselandroid7.activity.Dialog"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Translucent"></activity>
+        <activity android:name=".activity.FingerLogin"
+            android:screenOrientation="portrait"
+            ></activity>
 
         <service android:name="julioarellano.wiiselandroid7.service.ConnectionService"></service>
 
