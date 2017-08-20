@@ -2016,6 +2016,7 @@ public class AcMainScreen extends Activity implements IRefreshable {
                     } else {
                         // Already in list, update RSSI info
                         BleDeviceInfo deviceInfo = findDeviceInfo(device);
+                        if(deviceInfo!=null)
                         deviceInfo.updateRssi(rssi);
                         // mScanView.notifyDataSetChanged();
                         appendLoggerMessage("LeScanCallback. Updated " + device.getName());

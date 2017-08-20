@@ -110,6 +110,7 @@
     <string name="EnablePositionService">Enable location services</string>
     <string name="LocationNotEnabled">Location not enabled</string>
     <string name="FingerPrompt">Please put your finger on the sensor</string>
+    <string name="noPassword">Forgot your password?</string>
 
 	
 </resources>
