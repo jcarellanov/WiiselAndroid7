@@ -17,8 +17,8 @@ import julioarellano.wiiselandroid7.R;
 import julioarellano.wiiselandroid7.activity.AcMainScreen;
 import julioarellano.wiiselandroid7.manager.HttpUrlConnectionManager;
 
-import static julioarellano.wiiselandroid7.constants.AppConstants.PREFERENCES_EMAIL;
-import static julioarellano.wiiselandroid7.constants.AppConstants.PREFERENCES_PASSWORD;
+import static julioarellano.wiiselandroid7.constants.AppConstants.PREFERENCES_STRING1;
+import static julioarellano.wiiselandroid7.constants.AppConstants.PREFERENCES_STRING2;
 
 
 @TargetApi(Build.VERSION_CODES.M)
@@ -98,8 +98,8 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
                 final SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.app_name),
                         Context.MODE_PRIVATE);
 try{
-                String email = AESCrypt.decrypt(sharedPreferences.getString(PREFERENCES_EMAIL, ""));
-                String password = AESCrypt.decrypt(sharedPreferences.getString(PREFERENCES_PASSWORD, ""));
+                String email = AESCrypt.decrypt(sharedPreferences.getString(PREFERENCES_STRING1, ""));
+                String password = AESCrypt.decrypt(sharedPreferences.getString(PREFERENCES_STRING2, ""));
 
 
                     String msg = httpUrlConnectionManager.serverLogin(email, password);

@@ -55,8 +55,8 @@ public class AppConstants {
     public static final String PREFERENCES_DELAY_TIME = "delay_time";
     public static final String PREFERENCES_PRESS_SENSITIVITY = "pressure_sensitivity";
     public static final String PREFERENCES_AUTHENTICATED = "authenticated";
-    public static final String PREFERENCES_EMAIL ="email";
-    public static final String PREFERENCES_PASSWORD ="password";
+    public static final String PREFERENCES_STRING1 ="string1";
+    public static final String PREFERENCES_STRING2 ="string2";
 
 
     // DEFAULT VALUE

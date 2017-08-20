@@ -151,8 +151,8 @@ public class HttpUrlConnectionManager {
             editor.putString(AppConstants.PREFERENCES_FIRSTNAME, first_name);
             editor.putString(AppConstants.PREFERENCES_LASTNAME, last_name);
             editor.putString(AppConstants.PREFERENCES_CLPHONE, cl_phone);
-            editor.putString(AppConstants.PREFERENCES_EMAIL, encryptedEmail);
-            editor.putString(AppConstants.PREFERENCES_PASSWORD, encryptedPassword);
+            editor.putString(AppConstants.PREFERENCES_STRING1, encryptedEmail);
+            editor.putString(AppConstants.PREFERENCES_STRING2, encryptedPassword);
             editor.putBoolean(AppConstants.PREFERENCES_AUTHENTICATED, true);
 
             editor.apply();
@@ -412,5 +412,39 @@ public class HttpUrlConnectionManager {
         return message;
 
     }
+
+   public String reclaimPassword (String email) throws Exception {
+       String Message="";
+       getHost();
+       HttpURLConnection conn;
+       URL url = new URL(HOST + LOGIN_URL);
+       conn = (HttpURLConnection) url.openConnection();
+       conn.setReadTimeout(READ_TIMEOUT);
+       conn.setConnectTimeout(CONNECTION_TIMEOUT);
+       conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+       conn.setDoInput(true);
+       conn.setDoOutput(true);
+       conn.setRequestMethod("POST");
+
+       JSONObject request = new JSONObject(); // build the object with login credentials
+       request.put("email", email);
+
+       conn.connect();
+       DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
+       writer.writeBytes(request.toString()); // send login data
+       writer.flush();
+       writer.close();
+
+       int responseCode = conn.getResponseCode();
+
+       if (responseCode == HttpURLConnection.HTTP_OK) {
+           Message = ctx.getString(R.string.noPassword);
+       } else
+       {
+           Message = "error";
+       }
+
+       return Message;
+   }
 
 }
