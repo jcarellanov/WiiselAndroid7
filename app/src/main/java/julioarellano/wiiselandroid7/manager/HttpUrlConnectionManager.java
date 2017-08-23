@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.text.TextUtils;
 
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -30,6 +31,10 @@ import julioarellano.wiiselandroid7.constants.AppConstants;
 import julioarellano.wiiselandroid7.service.UIService;
 import julioarellano.wiiselandroid7.utils.AESCrypt;
 import julioarellano.wiiselandroid7.utils.UIUtil;
+
+/**
+ * Handles comms with the server.
+ */
 
 public class HttpUrlConnectionManager {
 
@@ -446,5 +451,18 @@ public class HttpUrlConnectionManager {
 
        return Message;
    }
+
+    void emergencyCall(String phoneNumber){
+
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        try{
+            ctx.startActivity(intent);
+        }catch (SecurityException e){
+            e.printStackTrace();
+        }
+
+    }
 
 }

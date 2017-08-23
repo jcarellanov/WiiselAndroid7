@@ -27,8 +27,10 @@ import android.net.NetworkInfo.State;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.StatFs;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import android.util.Log;
@@ -2222,6 +2224,27 @@ public class AcMainScreen extends Activity implements IRefreshable {
 
         v.vibrate(pattern, -1);
         return v;
+
+    }
+
+    public void storageAlarm() {
+
+        StatFs statFs = new StatFs(Environment.getExternalStorageDirectory().getPath());
+        long bytesAvailable = statFs.getAvailableBytes();
+        long megAvailable = bytesAvailable / 1048576;
+        if (megAvailable < 20) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.noMemory);
+            builder.setMessage(R.string.freeMemory);
+            builder.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
 
     }
 

@@ -45,6 +45,8 @@ import julioarellano.wiiselandroid7.utils.UIUtil;
  * This manager has methods for work with server. Singleton
  */
 
+//Http methods deprecated in favor of HttpUrlConnectionManager
+
 public class ConnectionManager {
 
     private static final String UPLOADFILE_URL = "/api/v1/data";

@@ -40,6 +40,7 @@ public class AcLogin extends Activity {
     private EditText password;
     Handler handler = new Handler();
     int MY_PERMISSIONS_ACCESS_FINE = 300;
+    int MY_PERMISSIONS_REQUEST_CALL_PHONE = 301;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,11 @@ public class AcLogin extends Activity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_ACCESS_FINE);
             enableLocationService();
+
+            //required to call
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    MY_PERMISSIONS_REQUEST_CALL_PHONE);
 
         }
 
