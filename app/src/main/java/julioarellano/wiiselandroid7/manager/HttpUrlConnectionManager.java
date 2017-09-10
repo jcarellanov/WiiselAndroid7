@@ -378,7 +378,7 @@ public class HttpUrlConnectionManager {
         return message;
     }
 
-    public String tokenLogin() throws Exception {
+    public String tokenLogin() throws Exception { //this needs server side implementation
         String message = "";
 
         String token = getHost();
@@ -418,7 +418,7 @@ public class HttpUrlConnectionManager {
 
     }
 
-   public String reclaimPassword (String email) throws Exception {
+   public String reclaimPassword (String email) throws Exception { //this needs server side implementation
        String Message="";
        getHost();
        HttpURLConnection conn;
@@ -452,7 +452,7 @@ public class HttpUrlConnectionManager {
        return Message;
    }
 
-    void emergencyCall(String phoneNumber){
+    void emergencyCall(String phoneNumber){ //to be tested with the insoles
 
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
